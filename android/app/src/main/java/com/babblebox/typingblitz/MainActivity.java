@@ -1,0 +1,5 @@
+package com.babblebox.typingblitz;
+
+import com.getcapacitor.BridgeActivity;
+
+public class MainActivity extends BridgeActivity {}
