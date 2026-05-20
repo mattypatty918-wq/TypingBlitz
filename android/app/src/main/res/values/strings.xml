@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Typing Blitz</string>
-    <string name="title_activity_main">Typing Blitz</string>
-    <string name="package_name">com.babblebox.typingblitz</string>
-    <string name="custom_url_scheme">com.babblebox.typingblitz</string>
+    <string name="app_name">Type Race</string>
+    <string name="title_activity_main">Type Race</string>
+    <string name="package_name">com.mattypattysapps.typerace</string>
+    <string name="custom_url_scheme">com.mattypattysapps.typerace</string>
 </resources>

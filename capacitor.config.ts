@@ -1,8 +1,8 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.babblebox.typingblitz',
-  appName: 'Typing Blitz',
+  appId: 'com.mattypattysapps.typerace',
+  appName: 'Type Race',
   webDir: 'dist'
 };
 

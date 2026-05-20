@@ -67,7 +67,7 @@ export default function App() {
     <div className="min-h-screen bg-gradient-to-b from-indigo-900 via-purple-900 to-black text-white flex flex-col items-center justify-center p-4">
       <div className="text-center mb-8">
         <div className="text-6xl mb-2">⌨️</div>
-        <h1 className="text-5xl font-black bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-500 bg-clip-text text-transparent">TYPING BLITZ</h1>
+        <h1 className="text-5xl font-black bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-500 bg-clip-text text-transparent">TYPE RACE</h1>
         <p className="text-gray-400 mt-2">Race the clock. Master the words.</p>
       </div>
       <div className="bg-white/10 rounded-3xl p-6 w-full max-w-sm space-y-4">
