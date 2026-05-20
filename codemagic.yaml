@@ -1,0 +1,54 @@
+# Codemagic CI/CD for Type Race (Typing Blitz)
+# App: https://github.com/mattypatty918-wq/typing-blitz
+
+workflows:
+  ios-build:
+    name: iOS Build
+    max_build_duration: 60
+    environment:
+      vars:
+        APP_ID: "com.mattypattysapps.typerace"
+        APP_NAME: "Type Race"
+        SCHEME: "App"
+        XCODE_WORKSPACE: "App/App.xcworkspace"
+        XCODE_PROJECT: "App/App.xcodeproj"
+        APPLE_TEAM_ID: "3B3YQ4328X"
+      node: v18
+    triggering:
+      events:
+        - push
+        - tag
+    scripts:
+      - name: Install dependencies
+        command: |
+          npm install
+          npx cap sync ios
+      - name: Set Xcode
+        command: sudo xcode-select -s /Applications/Xcode_16.app
+      - name: Build iOS
+        script: |
+          xcodebuild -workspace App/App.xcworkspace -scheme App -configuration Release archive
+          xcodebuild -exportArchive -archivePath build/*.xcarchive -exportPath build -exportOptionsPlist App/ExportOptions.plist
+    artifacts:
+      - build/*.ipa
+    publishing:
+      app_store_connect:
+        apple_id: ${{ secrets.APPLE_ID }}
+        password: ${{ secrets.APPLE_APP_PASSWORD }}
+        team_id: ${{ secrets.APPLE_TEAM_ID }}
+      email:
+        recipients:
+          - mattypatty918@gmail.com
+
+  android-build:
+    name: Android Build
+    max_build_duration: 60
+    environment:
+      java: java17
+      node: v18
+    scripts:
+      - name: Build
+        command: |
+          npm install && npx cap sync android && cd android && ./gradlew assembleRelease
+    artifacts:
+      - android/app/build/outputs/**/*.apk
