@@ -1,32 +1,23 @@
-name: Type Race
-description: Fast-paced typing racing game
-type: ios
-environment:
-  ios: "17.0"
-  node: "18"
+# Codemagic CI/CD for typing-blitz
 workflows:
   ios-workflow:
     name: iOS
     max_build_duration: 60
-    instance_type: mac_mini_m2
-    integrations:
-      app_store_connect: Codemagic
     environment:
       vars:
-        BUNDLE_ID: com.mattypattysapps.typerace
-        XCODE_WORKSPACE: App/App.xcworkspace
-        XCODE_SCHEME: App
+        XCODE_VERSION: "15.0"
+        APP_NAME: "typing-blitz"
+    triggering:
+      branch_patterns:
+        - pattern: master
+          include: true
     scripts:
-      - npm install
-      - npx cap sync ios
-      - cd ios/App && pod install
-      - keychain initialize
-      - app-store-connect fetch-signing-files $BUNDLE_ID --type IOS_APP_STORE --create
-      - keychain add-certificates
-      - xcode-project use-profiles
-      - xcode-project build-ipa --workspace $XCODE_WORKSPACE --scheme $XCODE_SCHEME
+      - git clone https://github.com/mattypatty918-wq/typing-blitz.git --depth 1
+      - cd typing-blitz && git submodule update --init --recursive
+      - cd typing-blitz && xcode-project fetch-dependencies --use-cache
+      - cd typing-blitz && xcode-project build --workspace ios/App.xcworkspace --scheme App --configuration Release
     artifacts:
-      - build/ios/ipa/*.ipa
+      - typing-blitz/ios/App/App.xcarchive
     publishing:
       app_store_connect:
-        auth: integration
+        api_key: Whitefoxes
